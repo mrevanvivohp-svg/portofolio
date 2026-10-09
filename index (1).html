@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nama Anda – Portofolio</title>
+<meta name="description" content="Portofolio Nama Anda, Web Developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef1f5;
+    --ink: #101a33;
+    --muted: #55607a;
+    --line: #cfd6e3;
+    --accent: #2a45ff;
+    --panel: #ffffff;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1424;
+      --ink: #eaeefb;
+      --muted: #9aa5c4;
+      --line: #263052;
+      --accent: #7f93ff;
+      --panel: #151d33;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Navigasi */
+  header { border-bottom: 1px solid var(--line); }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; gap: 1rem; flex-wrap: wrap; }
+  .logo { font-family: var(--display); font-weight: 800; text-decoration: none; font-size: 1.2rem; }
+  nav ul { display: flex; gap: 1.5rem; list-style: none; }
+  nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; }
+  nav ul a:hover { color: var(--accent); }
+
+  /* Profil pojok kiri atas */
+  .brand { display: flex; align-items: center; gap: .75rem; }
+  .avatar {
+    width: 44px; height: 44px; padding: 0; border-radius: 50%; overflow: hidden;
+    border: 2px solid var(--accent); background: var(--panel); cursor: pointer;
+  }
+  .avatar:hover { transform: scale(1.06); }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  dialog.foto {
+    margin: auto; padding: 0; border: 0; border-radius: 12px; overflow: hidden;
+    background: var(--panel); color: var(--ink); max-width: min(92vw, 420px);
+  }
+  dialog.foto::backdrop { background: rgba(10, 16, 32, .65); }
+  dialog.foto img { width: 100%; display: block; max-height: 70vh; object-fit: cover; }
+  dialog.foto .cap { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; gap: 1rem; }
+  dialog.foto strong { font-family: var(--display); font-size: 1.15rem; }
+  dialog.foto small { display: block; color: var(--muted); }
+  dialog.foto button {
+    border: 2px solid var(--ink); background: transparent; color: var(--ink);
+    border-radius: 6px; padding: .4rem .9rem; font: inherit; cursor: pointer;
+  }
+  dialog.foto button:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 5rem 0 4rem; }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(3rem, 11vw, 8rem);
+    line-height: .95;
+    letter-spacing: -.03em;
+    animation: masuk .8s ease both;
+  }
+  .hero .role {
+    font-family: var(--display);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 500;
+    color: var(--accent);
+    margin-top: 1.25rem;
+  }
+  .hero p { max-width: 52ch; color: var(--muted); margin-top: 1.25rem; }
+  .btns { display: flex; gap: .75rem; margin-top: 2rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: .8rem 1.4rem; border-radius: 6px;
+    font-weight: 500; text-decoration: none; border: 2px solid var(--ink);
+  }
+  .btn.utama { background: var(--ink); color: var(--bg); }
+  .btn:hover { border-color: var(--accent); }
+  .btn.utama:hover { background: var(--accent); color: #fff; }
+  @keyframes masuk { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  /* Section */
+  section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--display); font-size: 2rem; letter-spacing: -.01em; margin-bottom: 1.5rem; }
+
+  /* Tentang */
+  .tentang { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .tentang p + p { margin-top: 1rem; }
+  .fakta { list-style: none; border-left: 3px solid var(--accent); padding-left: 1.25rem; }
+  .fakta li { padding: .45rem 0; }
+  .fakta b { display: block; font-family: var(--display); }
+  .fakta span { color: var(--muted); }
+
+  /* Proyek */
+  .proyek { display: grid; gap: 1rem; }
+  .item {
+    display: grid; grid-template-columns: 1fr auto; gap: 1rem 2rem; align-items: start;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem;
+  }
+  .item h3 { font-family: var(--display); font-size: 1.35rem; }
+  .item p { color: var(--muted); margin-top: .35rem; max-width: 60ch; }
+  .tag { margin-top: .75rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag span { font-size: .85rem; border: 1px solid var(--line); border-radius: 999px; padding: .1rem .75rem; }
+  .item a.lihat { font-weight: 500; text-decoration-color: var(--accent); text-underline-offset: 4px; white-space: nowrap; }
+  .item a.lihat:hover { color: var(--accent); }
+
+  /* Keahlian */
+  .skill { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; }
+  .skill li { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: .45rem 1rem; font-weight: 500; }
+
+  /* Kontak */
+  .kontak p { max-width: 50ch; color: var(--muted); }
+  .kontak .surel {
+    display: inline-block; margin-top: 1rem; font-family: var(--display);
+    font-size: clamp(1.4rem, 4vw, 2.4rem); font-weight: 700; text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px; text-underline-offset: 6px;
+  }
+  .kontak .surel:hover { color: var(--accent); }
+  .sosmed { display: flex; gap: 1.25rem; margin-top: 1.5rem; list-style: none; }
+  .sosmed a { color: var(--muted); }
+  .sosmed a:hover { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 0; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 720px) {
+    .tentang { grid-template-columns: 1fr; }
+    .item { grid-template-columns: 1fr; }
+    .hero { padding: 3rem 0 2.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero h1 { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav aria-label="Navigasi utama">
+      <div class="brand">
+        <!-- FOTO: ganti src di bawah dengan foto Anda, misalnya "foto.jpg" (taruh satu folder dengan index.html) -->
+        <button class="avatar" id="btnProfil" type="button" aria-label="Lihat foto profil">
+          <!--FOTO KECIL-->
+          <img src="profil saya.jpg.jpg" width ="100" style="border-radius:50%; cursor : pointer" onclik="document.getElementById('popup') .style.display='flex'">
+          <!--FOTO BESAR (MUNCUL PAS DI CLICK )-->
+          <div id="popup" style="display:none; position:fixed; top:0; width:100%; height:100%; background: rgba(0, 0, 0, 0 .8); justify-content: center; align-items: center;" onclick="this.style.display='none'">
+            <img src="profil saya.jpg.jpg" width="300" style="border-radius: 15px">
+          </div>
+        </button>
+        <a class="logo" href="#atas">M.Rayfan Feriansyah</a>
+      </div>
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#keahlian">Keahlian</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="atas">
+  <!-- HERO: ganti nama, peran, dan deskripsi -->
+  <div class="wrap hero">
+    <h2>welcome To do my Portofolio</h2>
+    <p>Saya membangun website portofolio ini agar kalian kenal dekat dengan saya ,dan saya juga memberitahu bahwa saya bisa bikin sedikit web</p>
+
+  </div>
+
+  <!-- TENTANG -->
+  <section id="tentang">
+    <div class="wrap">
+      <h2>Tentang saya</h2>
+      <div class="tentang">
+        <div>
+          <p>Halo, M.Rayfan Feriansyah, seorang Mahasiswa Di kampus STIE Bina Karya. Saya suka mengubah ide sederhana menjadi website yang berfungsi dan enak dilihat.</p>
+          <p>Saya bekerja dari tahap desain sampai website tayang</p>
+        </div>
+        <ul class="fakta">
+          <li><b>Pendidikan</b><span>6 tahun di SD(163083)</span></li>
+          <li><b>Pendidikan</b><span>3 tahun di SMPN 2 Tebing Tinggi </span></li>
+          <li><b>Pendidikan</b><span>3 tahun di SMKN 2 Tebing Tinggi</span></li>
+          <li><b>Pendidikan</b><span>Sedang kuliah Jurusan S1 Manajemen</span></li>
+          <li><b>Pengalaman</b><span>2 tahun membuat website</span></li>
+          <li><b>Pengalaman</b><span>6 Bulan PKL di Dinas Kesehatan</span></li>
+          <li><b>Lokasi</b><span>Tebing Tinggi, Sumatera Utara</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEAHLIAN -->
+  <section id="keahlian">
+    <div class="wrap">
+      <h2>Keahlian</h2>
+      <ul class="skill">
+        <li>HTML &amp; CSS</li>
+        <li>JavaScript</li>
+        <li>PHP</li>
+        <li>Bermain Game Mobile Legends</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KONTAK: ganti email dan tautan sosial media -->
+  <section id="kontak" class="kontak">
+    <div class="wrap">
+      <h2>Mari bekerja sama</h2>
+      <p>Punya proyek atau pertanyaan? Kirim email atau kirim melalui instagram saya</p>
+      <a class="surel" href="mailto:email@contoh.com">Mrevanvivohp@gmail.com</a>
+      <ul class="sosmed">
+        <li><a href="https://www.instagram.com/ferianzzsea20?exln=dW9tNTyY2JycmN1" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 M.Rayfan Feriansyah</div>
+</footer>
+
+<dialog class="foto" id="dialogFoto" aria-label="Foto profil">
+  <img id="fotoBesar" alt="Foto Nama Anda">
+  <div class="cap">
+    <div><strong>Nama Anda</strong><small>Web Developer</small></div>
+    <button type="button" id="tutupFoto">Tutup</button>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('dialogFoto');
+  const kecil = document.getElementById('fotoKecil');
+  const besar = document.getElementById('fotoBesar');
+
+  document.getElementById('btnProfil').addEventListener('click', () => {
+    besar.src = kecil.src;   // foto besar otomatis sama dengan foto kecil
+    dialog.showModal();
+  });
+  document.getElementById('tutupFoto').addEventListener('click', () => dialog.close());
+  // klik area gelap di luar foto juga menutup
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+</script>
+ 
+</body>
+</html>
